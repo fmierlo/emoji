@@ -4,5 +4,5 @@
 
 ### Example
 
-    ./emoji 
+    ./e
     🪿 copied to clipboard.
