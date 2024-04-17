@@ -31,10 +31,11 @@ builds:
 
 brews:
   -
+    directory: Formula
     goarm: "7"
     repository:
       owner: fmierlo
-      name: tap
+      name: homebrew-tap
       pull_request:
         enabled: true
 
