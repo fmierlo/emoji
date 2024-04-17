@@ -31,20 +31,18 @@ builds:
 
 brews:
   -
-    directory: brew
     goarm: "7"
     repository:
       owner: fmierlo
-      name: emoji
+      name: tap
       pull_request:
         enabled: true
 
 nix:
   -
-    path: nix/emoji.nix
     repository:
       owner: fmierlo
-      name: emoji
+      name: nur
       pull_request:
         enabled: true
 
