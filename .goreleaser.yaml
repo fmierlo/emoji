@@ -69,8 +69,11 @@ archives:
           mode: 0644
 
 sboms:
-  -
-    artifacts: archive
+  - artifacts: archive
+  - id: source
+    artifacts: source
+  - id: package
+    artifacts: package
 
 nfpms:
   -
