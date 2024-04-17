@@ -37,8 +37,6 @@ brews:
       owner: fmierlo
       name: homebrew-tap
       branch: main
-      pull_request:
-        enabled: true
 
 nix:
   -
@@ -46,8 +44,6 @@ nix:
       owner: fmierlo
       name: nur
       branch: main
-      pull_request:
-        enabled: true
 
 source:
   enabled: true
