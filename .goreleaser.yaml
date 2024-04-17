@@ -1,0 +1,88 @@
+# This is an example .goreleaser.yml file with some sensible defaults.
+# Make sure to check the documentation at https://goreleaser.com
+
+# The lines below are called `modelines`. See `:help modeline`
+# Feel free to remove those if you don't want/need to use them.
+# yaml-language-server: $schema=https://goreleaser.com/static/schema.json
+# vim: set ts=2 sw=2 tw=0 fo=cnqoj
+
+version: 1
+
+builds:
+  -
+    binary: e
+    gobinary: true
+    goos:
+      - linux
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+      - arm
+    goarm:
+      - "6"
+      - "7"
+    hooks:
+      pre:
+        - cmd: mkdir -p ./dist/{{ .ProjectName }}_{{ .Target }}
+      post:
+        - cmd: cp -va ./e {{ .Path }}
+    no_main_check: true
+
+brews:
+  -
+    directory: brew
+    goarm: "7"
+    repository:
+      owner: fmierlo
+      name: emoji
+      pull_request:
+        enabled: true
+
+nix:
+  -
+    path: nix/emoji.nix
+    repository:
+      owner: fmierlo
+      name: emoji
+      pull_request:
+        enabled: true
+
+source:
+  enabled: true
+  prefix_template: "{{ .ProjectName }}-{{ .Version }}/"
+
+archives:
+  -
+    files:
+      - src: LICENSE
+        info:
+          owner: root
+          group: root
+          mtime: "{{ .CommitDate }}"
+          mode: 0644
+      - src: README.md
+        info:
+          owner: root
+          group: root
+          mtime: "{{ .CommitDate }}"
+          mode: 0644
+
+sboms:
+  -
+    artifacts: archive
+
+nfpms:
+  -
+    maintainer: Fabio Mierlo <fmierlo@users.noreply.github.com>
+    contents:
+      - src: ./LICENSE
+        dst: /usr/share/doc/emoji/copyright
+        file_info:
+          mode: 0644
+    formats:
+      - deb
+      - rpm
+
+release:
+  name_template: "v{{ .Version }}"
